@@ -1,0 +1,144 @@
+[gd_scene load_steps=18 format=3 uid="uid://bt7ugv777l0xi"]
+
+[ext_resource type="Texture2D" uid="uid://c6bbhwaukk7l6" path="res://KingsAndPigs/09-Bomb/Boooooom (52x56).png" id="1_luc2v"]
+[ext_resource type="Texture2D" uid="uid://c7p57nd7g3sw7" path="res://KingsAndPigs/09-Bomb/Bomb Off.png" id="1_lvp1x"]
+[ext_resource type="Script" path="res://object.gd" id="2_h3xif"]
+[ext_resource type="Texture2D" uid="uid://hu76djm6mj4b" path="res://KingsAndPigs/09-Bomb/Bomb On (52x56).png" id="3_ukby7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjlhm"]
+atlas = ExtResource("1_lvp1x")
+region = Rect2(0, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qhpl"]
+atlas = ExtResource("3_ukby7")
+region = Rect2(0, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nckex"]
+atlas = ExtResource("3_ukby7")
+region = Rect2(52, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rrvsu"]
+atlas = ExtResource("3_ukby7")
+region = Rect2(104, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckx4d"]
+atlas = ExtResource("3_ukby7")
+region = Rect2(156, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fa1rj"]
+atlas = ExtResource("1_luc2v")
+region = Rect2(0, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ben7u"]
+atlas = ExtResource("1_luc2v")
+region = Rect2(52, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2twvt"]
+atlas = ExtResource("1_luc2v")
+region = Rect2(104, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bglm3"]
+atlas = ExtResource("1_luc2v")
+region = Rect2(156, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pwse7"]
+atlas = ExtResource("1_luc2v")
+region = Rect2(208, 0, 52, 56)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vm7b"]
+atlas = ExtResource("1_luc2v")
+region = Rect2(260, 0, 52, 56)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3btfu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjlhm")
+}],
+"loop": true,
+"name": &"off",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qhpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nckex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rrvsu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckx4d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fa1rj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ben7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2twvt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bglm3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pwse7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vm7b")
+}],
+"loop": false,
+"name": &"on",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_owif4"]
+radius = 6.255
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Bomb" type="AnimatedSprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(16, 16)
+sprite_frames = SubResource("SpriteFrames_3btfu")
+animation = &"off"
+autoplay = "off"
+script = ExtResource("2_h3xif")
+
+[node name="Area2D" type="Area2D" parent="Bomb"]
+
+[node name="HitBox" type="CollisionShape2D" parent="Bomb/Area2D"]
+position = Vector2(0.5, 5.25)
+shape = SubResource("CircleShape2D_owif4")
+
+[node name="Camera2D" type="Camera2D" parent="Bomb"]
+
+[node name="Score" type="Label" parent="Bomb"]
+anchors_preset = -1
+anchor_left = -0.18
+anchor_top = 0.157
+anchor_right = 0.5
+anchor_bottom = 0.448
+offset_left = -26.64
+offset_top = -28.792
+offset_right = -25.0
+offset_bottom = -22.088
+
+[node name="Highscore" type="Label" parent="Bomb"]
+anchors_preset = -1
+anchor_left = 0.519
+anchor_top = 0.143
+anchor_right = 1.192
+anchor_bottom = 0.554
+offset_left = -25.988
+offset_top = -28.008
+offset_right = -25.984
+offset_bottom = -28.024
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[connection signal="animation_finished" from="Bomb" to="Bomb" method="_on_animation_finished"]
+[connection signal="input_event" from="Bomb/Area2D" to="Bomb" method="_on_area_2d_input_event"]

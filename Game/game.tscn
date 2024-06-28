@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://xkng5j5xmtrb"]
+
+[ext_resource type="PackedScene" uid="uid://bt7ugv777l0xi" path="res://object.tscn" id="1_xl041"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="bomb" parent="." instance=ExtResource("1_xl041")]
+position = Vector2(0, 1)
